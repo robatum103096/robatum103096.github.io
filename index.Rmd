@@ -4,7 +4,11 @@ output:
   html_document:
     toc: true
     toc_float: true
-    theme: cosmo
+    theme: spacelab
 ---
+<img src="Me.jpg" style="width:40%">
 
-# HI
+# Academic & Professional Experience
+
+[Curriculum Vitae](file:///C:/Users/Owner/Documents/Tumasian_Robert_CV.pdf)
+

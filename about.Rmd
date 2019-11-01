@@ -1,0 +1,13 @@
+---
+title: ""
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: spacelab
+---
+# About Me
+
+I am currently a PhD student in biostatistics at Columbia University. My main research interests are applying and developing statistical methods to address problems in drug safety, effectiveness and utilization. I am particularly interested in confronting the opioid epidemic and other substance use disorders from a computational perspective.
+
+<img src="MathHumor.jpg" style="width:50%">
