@@ -10,7 +10,7 @@ output:
 
 # Academic & Professional Experience
 
-[Curriculum Vitae](file:///C:/Users/Owner/Documents/Tumasian_Robert_CV.pdf)
+[Curriculum Vitae (Full)](file:///C:/Users/Owner/Documents/Tumasian_Robert_CV.pdf)
 
 ## Education
 **Columbia University**, **Mailman School of Public Health**, New York, NY

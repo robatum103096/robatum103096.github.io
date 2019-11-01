@@ -18,17 +18,19 @@ set.seed(132)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Average number of items ordered by users by hour of day in the personal care department
+### Total number of items ordered by a random sample of 200 users from departments with greater than ten aisles
 
 ```{r}
 instacart %>%
-  select(department, user_id, add_to_cart_order, order_hour_of_day) %>%
-  filter(department == "personal care") %>%
-  group_by(order_hour_of_day) %>%
-  summarize(Average_Number_of_Items_Ordered = mean(add_to_cart_order)) %>%
-  plot_ly(x = ~order_hour_of_day, y = ~Average_Number_of_Items_Ordered,
-          type = 'scatter', mode = 'lines')
+  select(department, aisle_id, user_id, add_to_cart_order) %>%
+  filter(department %in% c("frozen", "snacks", "pantry", "personal care")) %>%
+  group_by(department, user_id) %>%
+  summarize(Number_of_Items_Ordered = sum(add_to_cart_order)) %>%
+  ungroup() %>%
+  sample_n(200) %>%
+  plot_ly(y = ~Number_of_Items_Ordered, color = ~department, type = "box")
 ```
+
 
 Column {data-width=350}
 -----------------------------------------------------------------------
@@ -46,15 +48,14 @@ instacart %>%
   plot_ly(x = ~Department, y = ~Number_of_Aisles, type = "bar")
 ```
 
-### Total number of items ordered by a random sample of 200 users from departments with greater than ten aisles
+### Average number of items ordered by users by hour of day in the personal care department
 
 ```{r}
 instacart %>%
-  select(department, aisle_id, user_id, add_to_cart_order) %>%
-  filter(department %in% c("frozen", "snacks", "pantry", "personal care")) %>%
-  group_by(department, user_id) %>%
-  summarize(Number_of_Items_Ordered = sum(add_to_cart_order)) %>%
-  ungroup() %>%
-  sample_n(200) %>%
-  plot_ly(y = ~Number_of_Items_Ordered, color = ~department, type = "box")
+  select(department, user_id, add_to_cart_order, order_hour_of_day) %>%
+  filter(department == "personal care") %>%
+  group_by(order_hour_of_day) %>%
+  summarize(Average_Number_of_Items_Ordered = mean(add_to_cart_order)) %>%
+  plot_ly(x = ~order_hour_of_day, y = ~Average_Number_of_Items_Ordered,
+          type = 'scatter', mode = 'lines')
 ```
