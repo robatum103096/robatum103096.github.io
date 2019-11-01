@@ -10,34 +10,51 @@ output:
 library(flexdashboard)
 library(plotly)
 library(p8105.datasets)
+library(tidyverse)
+
+set.seed(132)
 ```
-
-```{r}
-
-```
-
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Average number of items ordered by users by hour of day in the personal care department
 
 ```{r}
-
+instacart %>%
+  select(department, user_id, add_to_cart_order, order_hour_of_day) %>%
+  filter(department == "personal care") %>%
+  group_by(order_hour_of_day) %>%
+  summarize(Average_Number_of_Items_Ordered = mean(add_to_cart_order)) %>%
+  plot_ly(x = ~order_hour_of_day, y = ~Average_Number_of_Items_Ordered,
+          type = 'scatter', mode = 'lines')
 ```
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Number of aisles in each department
 
 ```{r}
-
+instacart %>%
+  select(department, aisle_id) %>%
+  rename("Department" = department) %>%
+  group_by(Department) %>%
+  summarize(Number_of_Aisles = n_distinct(aisle_id)) %>%
+  mutate(Department = 
+           fct_reorder(Department, Number_of_Aisles)) %>%
+  plot_ly(x = ~Department, y = ~Number_of_Aisles, type = "bar")
 ```
 
-### Chart C
+### Total number of items ordered by a random sample of 200 users from departments with greater than ten aisles
 
 ```{r}
-
+instacart %>%
+  select(department, aisle_id, user_id, add_to_cart_order) %>%
+  filter(department %in% c("frozen", "snacks", "pantry", "personal care")) %>%
+  group_by(department, user_id) %>%
+  summarize(Number_of_Items_Ordered = sum(add_to_cart_order)) %>%
+  ungroup() %>%
+  sample_n(200) %>%
+  plot_ly(y = ~Number_of_Items_Ordered, color = ~department, type = "box")
 ```
-
