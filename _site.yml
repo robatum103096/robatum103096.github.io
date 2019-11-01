@@ -5,6 +5,8 @@ navbar:
   right:
     - text: "About"
       href: about.html
+    - text: "Dashboard"
+      href: dashboard.html
     - text: "LinkedIn"
       href: https://www.linkedin.com/in/robertatumasianiii/
     - icon: fa-envelope fa-lg
